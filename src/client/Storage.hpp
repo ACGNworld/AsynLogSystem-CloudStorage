@@ -12,7 +12,7 @@ using std::endl;
 using std::cerr;
 
 const unsigned short server_port_g = 8081;
-const std::string server_ip_g = "127.0.0.1";
+const std::string server_ip_g = "192.168.31.245/";
 const std::string storage_filename_g = "./storage.dat";//for storage uploaded files info
 
 namespace my_storage {

@@ -64,8 +64,12 @@ public:
         using return_type = typename std::result_of<F(Args...)>::type;
 
         // 创建一个打包任务
+        // auto task = std::make_shared<std::packaged_task<return_type()>>(
+        //     std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+        // 用lambda替代bind的线程池实现
         auto task = std::make_shared<std::packaged_task<return_type()>>(
-            std::bind(std::forward<F>(f), std::forward<Args>(args)...));
+            [=]()
+            { return f(args...); });
 
         std::future<return_type> res = task->get_future();
         {

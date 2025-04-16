@@ -23,7 +23,7 @@ namespace mylog
         AsyncLogger(const std::string &logger_name, std::vector<LogFlush::ptr> &flushs, AsyncType type)
             : logger_name_(logger_name),//初始化日志器的名字
               flushs_(flushs.begin(), flushs.end()),//添加实例化方式给日志器，如日志输出到文件还是标准输出，可能有多种
-              asyncworker(std::make_shared<AsyncWorker>(//启动异步工作器
+              asyncworker(std::make_shared<AsyncWorker>(//启动异步工作器 ****核心***最难的****
                   std::bind(&AsyncLogger::RealFlush, this, std::placeholders::_1),
                   type)) {}
         virtual ~AsyncLogger() {};
@@ -174,7 +174,7 @@ namespace mylog
     public:
         using ptr = std::shared_ptr<LoggerBuilder>;
         void BuildLoggerName(const std::string &name) { logger_name_ = name; }
-        void BuildLopperType(AsyncType type) { async_type_ = type; }
+        void BuildLoggerType(AsyncType type) { async_type_ = type; }
         template <typename FlushType, typename... Args>
         void BuildLoggerFlush(Args &&...args)
         {
